@@ -100,7 +100,7 @@ export default function App() {
 
             <div className=' self-start justify-self-end pr-10 pt-7'>{settings.searchBar && <SearchBar/>}</div>
           </div>
-         { settings.greeting && <Greeting/>}
+         <div className='flex items-center justify-center'>{ settings.greeting && <Greeting/>}</div>
         <div className='grid grid-cols-4 mb-7'>
           <div>
             <Setting settings={settings} setSettings={setSettings}/> 

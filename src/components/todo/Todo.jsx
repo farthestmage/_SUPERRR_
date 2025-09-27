@@ -2,6 +2,7 @@ import { useState,useRef,useEffect } from "react"
 import { Task } from "./Task"
 import { useTasks } from "./useTask"
 import { motion, AnimatePresence } from "framer-motion";
+import { BrushCleaning } from 'lucide-react';
 
 export const Todo = () => {
     const [expand, setExpand] = useState(false)
@@ -84,13 +85,21 @@ export const Todo = () => {
                                 opacity: { duration: 0.2, ease: "easeOut" },
                                 layout: {duration: 0.3, type:"spring", bounce:0.5}
                             }} 
-                        className={`absolute bottom-12 right-20 bg-white/20 backdrop-blur-sm rounded-lg text-white p-4  shadow-lg mb-3 origin-bottom
+                        className={`absolute bottom-12 min-w-[16rem] right-20 bg-white/20 backdrop-blur-sm rounded-lg text-white p-4  shadow-lg mb-3 origin-bottom
                             h-auto"}
                             shadow-lg rounded-xl p-4 
                             `} 
                         >
                             <h3 className="mb-1 font-semibold text-[1.5rem]">Todo</h3>
                             <div className={`max-h-[26rem] overflow-y-auto overflow-x-hidden`}>
+                                {tasks.length === 0 && !addEventListener?(
+                                    <div className="flex justify-center py-1 text-[1.1rem] text-shadow-2xs text-white/70">
+                                        <div className="opacity-60 mr-1">
+                                            <BrushCleaning />
+                                        </div>
+                                        No Tasks
+                                    </div>
+                                ):(<div></div>)}
                                 <AnimatePresence mode="poplayout">
                                     {(expand ? tasks : tasks.slice(0, 3)).map((task) => (
                                         <motion.div
