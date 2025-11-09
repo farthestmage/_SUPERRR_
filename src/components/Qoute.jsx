@@ -1,7 +1,22 @@
+import { useEffect, useState } from "react"
+
 export const Qoute = () => {
+
+  const [qoute, setQoute] = useState("")
+  useEffect(() => {
+    fetch("https://dummyjson.com/quotes/random")
+    .then(response => response.json())
+    .then(data => {
+        setQoute(data)
+    })
+    .catch(err => {
+        console.error("Error fetching weather data:", err)
+    })
+  },[])
+
     return(
         <div className=" text-white italic opacity-80 text-[1.3rem]">
-          “Start where you are. Use what you have. Do what you can.”
+          {qoute.quote}
         </div>
     )
 }
