@@ -56,7 +56,7 @@ export const WeatherDetails = ({setCity, city,futureWeather,weathercurrent,locom
         const displayNameArray = item.display_name.split(",")
         const displayName = displayNameArray[0] + ", " + displayNameArray[displayNameArray.length - 1]
 
-        chrome.storage.local.set({"weather_city":{name: displayName, lon:item.lon, lat:item.lat}},() => {
+        chrome.storage.session.set({"weather_city":{name: displayName, lon:item.lon, lat:item.lat}},() => {
             setCity(displayName)
             setInput("")
             setSearch(false)
@@ -81,8 +81,8 @@ export const WeatherDetails = ({setCity, city,futureWeather,weathercurrent,locom
                             </div>
                         
                             <div>
-                                <p>Max: {futureWeather[0].day.maxtemp_c}°C</p>
-                                <p className="mt-2">Min: {futureWeather[0].day.mintemp_c}°C</p>
+                                <p>Max: {Math.round(futureWeather[0].day.maxtemp_c)}°C</p>
+                                <p className="mt-2">Min: {Math.round(futureWeather[0].day.mintemp_c)}°C</p>
                             </div>
 
                             {/**Use Icons instead of names */}
