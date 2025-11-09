@@ -10,7 +10,6 @@ const defaultSettings= {
     quote: true,
     todo: true,
     searchBar: true,
-    wallpaperRefresh: true,
   }
 
 
@@ -27,6 +26,24 @@ export default function App() {
     await saveImageToStorage(url)
     
   }
+
+  async function fetchRefreshTime() {
+      try {
+        const result = await chrome.storage.local.get("wallpaper_time");
+
+
+        // Check if key exists
+        if (!result || !("wallpaper_time" in result)) {
+          throw new Error('Key "wallpaper_time" not found in storage');
+        }
+
+        setRefreshTime(result.wallpaper_time || 30);
+        console.log("refresh time set", result.wallpaper_time)
+      } catch (err) {
+        console.error("Storage fetch error:", err.message);
+      }
+    }
+
   
 
   // Changing wallpaper after x minutes
@@ -39,6 +56,8 @@ export default function App() {
       chrome.storage.local.get("wallpaper", (URI) => {
         setWallpaperURI(URI)
       })
+
+
     }
 
     const intervalId = setInterval(() => {
@@ -53,6 +72,9 @@ export default function App() {
 
   // Initially set the wallpaper 
   useEffect(() => {
+
+        fetchRefreshTime()
+
         chrome.storage.local.get("wallpaper", (URI) => {
           if(!URI.wallpaper){
             const save = async() => {
