@@ -22,7 +22,7 @@ export default function App() {
 
   // Some helper function
   const wallpaperApi = async() => {
-    const image = await WallpaperAPI("snow")
+    const image = await WallpaperAPI("placeholder")
     await saveImageToStorage(image)
     
   }

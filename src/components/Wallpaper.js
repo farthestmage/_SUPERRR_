@@ -3,7 +3,8 @@ import {createClient} from "pexels"
 const KEYWORDS = {
     "sunny" : ["sunny", "sun", "afternoon", "blue sky", "sky"],
     "rainy" : ["rains", "clouds", "thunderstorm", "street rain"],
-    "snow" : ["snow", "snowfall", "snowy night"]
+    "snow" : ["snow", "snowfall", "snowy night"],
+    "placeholder" : ["nature", "landscape", "calm", "dark", "minimalism", "city", "rain", "cafe", "cute animals", "sunset", "mist", "mountains", "abstract art"]
 }
 
 export const WallpaperAPI = async(weather) => {
