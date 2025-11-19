@@ -20,7 +20,7 @@ export const WallpaperAPI = async(weather) => {
     const randomIndex = Math.floor(Math.random() * test.photos.length);
     const link = test.photos[randomIndex].src.large2x
     
-    return link
+    return test.photos[randomIndex]
 }
 
 async function imageUrlToBase64(url) {
@@ -35,12 +35,15 @@ async function imageUrlToBase64(url) {
     });
 }
 
-export async function saveImageToStorage(url, key = "wallpaper") {
+export async function saveImageToStorage(image, key = "wallpaper") {
   try {
     const time = new Date()
-    const base64 = await imageUrlToBase64(url);
+    console.log(image)
+    const base64 = await imageUrlToBase64(image.src.large2x);
     chrome.storage.local.set({ [key]: base64 });
     chrome.storage.local.set({ "time": time.getTime()});
+    chrome.storage.local.set({ "photographer": image.photographer});
+    chrome.storage.local.set({ "author_link": image.url})
   } catch (err) {
     console.error("Error converting image:", err);
   }

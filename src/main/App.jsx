@@ -1,5 +1,5 @@
 import './App.css'
-import { Todo, WeatherWidget, Qoute, Greeting, DateTime, SearchBar, WallpaperAPI , Setting} from '../components'
+import { Todo, WeatherWidget, Qoute, Greeting, DateTime, SearchBar, WallpaperAPI , Setting, Credits} from '../components'
 import { useEffect, useState } from 'react'
 import { saveImageToStorage } from '../components/Wallpaper'
 import { useSettings } from './useSettings'   
@@ -17,13 +17,13 @@ export default function App() {
 
   const [weatherMode, setWeatherMode] = useState(false)
   const [wallpaperURI, setWallpaperURI] = useState("")
-  const [refreshTime, setRefreshTime] = useState(30) // in mins
+  const [refreshTime, setRefreshTime] = useState() // in mins
   const [settings, setSettings] = useSettings()
 
   // Some helper function
   const wallpaperApi = async() => {
-    const url = await WallpaperAPI("snow")
-    await saveImageToStorage(url)
+    const image = await WallpaperAPI("snow")
+    await saveImageToStorage(image)
     
   }
 
@@ -38,7 +38,7 @@ export default function App() {
         }
 
         setRefreshTime(result.wallpaper_time || 30);
-        console.log("refresh time set", result.wallpaper_time)
+        // console.log("refresh time set", result.wallpaper_time)
       } catch (err) {
         console.error("Storage fetch error:", err.message);
       }
@@ -124,8 +124,11 @@ export default function App() {
           </div>
          <div className='flex items-center justify-center'>{ settings.greeting && <Greeting/>}</div>
         <div className='grid grid-cols-4 mb-7'>
-          <div>
-            <Setting settings={settings} setSettings={setSettings}/> 
+          <div className=''>
+            <div className='flex fixed bottom-6 left-6 items-center'>
+              <Setting settings={settings} setSettings={setSettings}/> 
+              <Credits/>
+            </div>
           </div>
           <div className='col-span-2 justify-self-center place-self-end'>{settings.quote && <Qoute/>}</div>
           <div className='justify-self-center place-self-end'>{settings.todo && <Todo/>}</div>

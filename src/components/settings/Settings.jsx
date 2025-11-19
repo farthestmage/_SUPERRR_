@@ -85,7 +85,7 @@ export const Setting = ({settings,setSettings}) => {
 
   {/* absolute bottom-12 right-20  */}
   return (
-    <div className="fixed bottom-6 left-6">
+    <div className=" mr-4">
       {/* Settings Icon */}
       <div
         ref={settingRef}
