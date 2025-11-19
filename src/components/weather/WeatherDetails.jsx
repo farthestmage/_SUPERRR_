@@ -66,8 +66,8 @@ export const WeatherDetails = ({setCity, city,futureWeather,weathercurrent,locom
 
     return (
         <>
-        {weathercurrent || locomoco || futureWeather ? (<div className="relative">
-            <div className=" max-w-100 bg-amber-50/20 backdrop-blur-xs absolute top-20 left-4 p-5 rounded-md text-white/90">
+        {weathercurrent || locomoco || futureWeather ? (
+            <div className=" max-w-100 bg-amber-50/20 backdrop-blur-xs mt-3 ml-4 p-5 rounded-md text-white/90">
                 <div className={`${search?"opacity-0":""} `}>
                     <div className="flex justify-between items-center">
                         <div className="text-[1.1rem]  text-shadow-md">{locomoco.name},{locomoco.country}</div>
@@ -126,7 +126,7 @@ export const WeatherDetails = ({setCity, city,futureWeather,weathercurrent,locom
                     </div>
                 </div>
             </div>
-            </div>) : <p>Loading...</p>}
+            ) : <p>Loading...</p>}
         </>
     )
 }
