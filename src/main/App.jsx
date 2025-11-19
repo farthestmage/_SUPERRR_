@@ -111,18 +111,20 @@ export default function App() {
         <div className='grid grid-rows-3 h-full'>
           {/* <Goog/>  */}
 
-          <div className='grid grid-cols-3 place-items-center'>
+          <div className={`grid grid-cols-3 place-items-center`} >
             <div className=''></div>
 
-            <div className=''>
-             { settings.clock && <DateTime
+            <div className=" ">
+             { settings.clock && settings.greeting && <DateTime
                 weatherMode = {weatherMode}
               />}
             </div>
 
             <div className=' self-start justify-self-end pr-10 pt-7'>{settings.searchBar && <SearchBar/>}</div>
           </div>
-         <div className='flex items-center justify-center'>{ settings.greeting && <Greeting/>}</div>
+         <div className='flex items-center justify-center'>
+          { settings.greeting ? <Greeting/> :  settings.clock && <DateTime weatherMode = {weatherMode}/>}
+          </div>
         <div className='grid grid-cols-4 mb-7'>
           <div className=''>
             <div className='flex fixed bottom-6 left-6 items-center'>
